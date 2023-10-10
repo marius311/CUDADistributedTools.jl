@@ -1,0 +1,6 @@
+[deps]
+CUDADistributedTools = "835a5dab-0b58-4298-9862-26ab2a34aefd"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+
+[compat]
+Documenter = "1.1"

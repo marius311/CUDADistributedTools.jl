@@ -1,0 +1,8 @@
+name = "CUDADistributedTools"
+uuid = "835a5dab-0b58-4298-9862-26ab2a34aefd"
+authors = ["Marius Millea <mariusmillea@gmail.com>"]
+version = "1.0.0"
+
+[deps]
+Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
