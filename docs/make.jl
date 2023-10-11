@@ -1,16 +1,13 @@
-# ensure in right directory and environment
+
 cd(dirname(@__FILE__))
 using Pkg
-pkg"activate ."
+Pkg.activate(".")
 
 using CUDADistributedTools, Documenter
 
 makedocs(
     sitename="CUDADistributedTools.jl", 
-    pages = [
-        "index.md",
-    ],
-    remotes = nothing
+    pages = ["index.md"],
 )
 
 deploydocs(
