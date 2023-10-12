@@ -94,7 +94,7 @@ function proc_info()
     lines = @eval Main map(procs()) do id
         @fetchfrom id begin
             info = ["myid = $id"]
-            !isnothing($_mpi_rank()) && push!(info, "mpi-rank = $(CMBLensing._mpi_rank())")
+            !isnothing($_mpi_rank()) && push!(info, "mpi-rank = $($_mpi_rank())")
             push!(info, "host = $(gethostname())")
             @isdefined(CUDA) && push!(info, "device = $(sprint(io->show(io, MIME("text/plain"), CUDA.device()))) $(split(string(CUDA.uuid(CUDA.device())),'-')[1]))")
             " ("*join(info, ", ")*")"
