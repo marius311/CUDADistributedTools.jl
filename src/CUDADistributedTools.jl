@@ -49,7 +49,7 @@ julia> assign_GPU_workers()
 """
 function assign_GPU_workers(;print_info=true, master_has_own_gpu=false, remove_oversubscribed_workers=false)
     if nprocs() > 1
-        @everywhere @eval Main using Distributed, CUDA
+        @everywhere @eval Main using Distributed, CUDA, CUDADistributedTools
         master_uuid = @eval Main CUDA.uuid(device())
         accessible_gpus = Dict(asyncmap(workers()) do id
             @eval Main @fetchfrom $id begin
@@ -76,6 +76,7 @@ function assign_GPU_workers(;print_info=true, master_has_own_gpu=false, remove_o
         @everywhere workers() device!($assignments[myid()])
     end
     print_info && proc_info()
+    nothing
 end
 
 
@@ -89,7 +90,7 @@ function proc_info()
     lines = @eval Main map(procs()) do id
         @fetchfrom id begin
             info = ["myid = $id"]
-            !isnothing(CMBLensing._mpi_rank()) && push!(info, "mpi-rank = $(CMBLensing._mpi_rank())")
+            !isnothing($_mpi_rank()) && push!(info, "mpi-rank = $(CMBLensing._mpi_rank())")
             push!(info, "host = $(gethostname())")
             @isdefined(CUDA) && push!(info, "device = $(sprint(io->show(io, MIME("text/plain"), CUDA.device()))) $(split(string(CUDA.uuid(CUDA.device())),'-')[1]))")
             " ("*join(info, ", ")*")"
@@ -98,5 +99,6 @@ function proc_info()
     @info join(["Processes ($(nprocs())):"; lines], "\n")
 end
 
+_mpi_rank() = @eval Main @isdefined(MPI) && MPI.Initialized() ? MPI.Comm_rank(MPI.COMM_WORLD) : nothing
 
 end
