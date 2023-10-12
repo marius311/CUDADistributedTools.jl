@@ -10,4 +10,4 @@ pkg> add https://github.com/marius311/CUDADistributedTools.jl
 
 ## Documentation
 
-Please see [documentation](https://cosmicmar.com/CUDADistributedTools.jl/latest).
+Please see [documentation](https://cosmicmar.com/CUDADistributedTools.jl).

@@ -43,7 +43,11 @@ julia> addprocs(3)
  4
 
 julia> assign_GPU_workers()
-
+┌ Info: Processes (4):
+│  (myid = 1, host = nid001293, device = CuDevice(0): NVIDIA A100-SXM4-40GB 1c40175b))
+│  (myid = 2, host = nid001293, device = CuDevice(1): NVIDIA A100-SXM4-40GB f179efe2))
+│  (myid = 3, host = nid001293, device = CuDevice(2): NVIDIA A100-SXM4-40GB 36d32866))
+└  (myid = 4, host = nid001293, device = CuDevice(3): NVIDIA A100-SXM4-40GB 634451b9))
 ```
 
 """
